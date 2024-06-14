@@ -1,8 +1,8 @@
-import {Product} from "@/interfaces";
+import {IProduct} from "@/interfaces";
 import {ProductGridItem} from "@/components";
 
 interface IProductGridProps {
-  products: Product[];
+  products: IProduct[];
 }
 
 export const ProductGrid = ({products}: IProductGridProps) => {

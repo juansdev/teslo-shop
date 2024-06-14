@@ -1,12 +1,12 @@
 "use client";
 
-import {Product} from "@/interfaces";
+import {IProduct} from "@/interfaces";
 import Image from "next/image";
 import Link from "next/link";
 import {useState} from "react";
 
 interface IProductGridItemProps {
-  product: Product;
+  product: IProduct;
 }
 
 export const ProductGridItem = ({product}: IProductGridItemProps) => {
