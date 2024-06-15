@@ -4,7 +4,10 @@ import "./globals.css";
 import {ReactNode} from "react";
 
 export const metadata: Metadata = {
-  title: "Teslo | Shop",
+  title: {
+    template: "%s - Teslo | Shop",
+    default: "Home - Teslo | Shop"
+  },
   description: "A Virtual Shop of Products",
 };
 
