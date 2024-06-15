@@ -12,6 +12,16 @@ export interface IProduct {
   gender: ICategory
 }
 
+export interface ICartProduct {
+  id: string;
+  slug: string;
+  title: string;
+  price: number;
+  quantity: number;
+  size: ISize;
+  image: string;
+}
+
 export type ICategory = 'men' | 'women' | 'kid' | 'unisex';
 export type ISize = 'XS' | 'S' | 'M' | 'L' | 'XL' | 'XXL' | 'XXXL';
 export type IType = 'shirts' | 'pants' | 'hoodies' | 'hats';

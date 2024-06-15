@@ -1,8 +1,9 @@
 import {Metadata} from "next";
 import {notFound} from "next/navigation";
 import {titleFont} from "@/config/fonts";
-import {ProductMobileSlideshow, ProductSlideShow, QuantitySelector, SizeSelector, StockLabel} from "@/components";
+import {ProductMobileSlideshow, ProductSlideShow, StockLabel} from "@/components";
 import {getProductBySlug} from "@/actions";
+import AddToCart from "@/app/(shop)/product/[slug]/ui/AddToCart";
 
 export const revalidate = 604800; // 7 Days
 
@@ -49,12 +50,7 @@ export default async function ProductPage({params}: IProductProps) {
         <p className={"text-lg mb-5"}>
           ${product.price}
         </p>
-        <button className={"btn-primary my-5"}>
-          Add to the Cart
-        </button>
-        <SizeSelector selectedSize={product.sizes[0]} availableSizes={product.sizes}/>
-
-        <QuantitySelector quantity={1}/>
+        <AddToCart product={product}></AddToCart>
 
         <h3 className={"font-bold text-sm"}>
           Description
