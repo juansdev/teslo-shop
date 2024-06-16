@@ -2,7 +2,6 @@ export const revalidate = 60;
 
 import {Pagination, ProductGrid, Title} from "@/components";
 import {getPaginatedProductsWithImages} from "@/actions";
-import {redirect} from "next/navigation";
 
 interface IHomeProps {
   searchParams: {
@@ -17,7 +16,6 @@ export default async function Home({searchParams}: IHomeProps) {
       page
     }
   });
-  if (!products.length) redirect("/");
   return (
     <>
       <Title title={"Shop"} subtitle={"All Products"} className={"mb-2"}></Title>

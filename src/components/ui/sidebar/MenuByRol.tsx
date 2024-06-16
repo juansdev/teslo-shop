@@ -56,7 +56,7 @@ export const ItemMenuByFilter = ({
           break;
         case "Orders":
           setItemMenu(
-            <Link href={"/"} onClick={() => onClick()}
+            <Link href={"/orders"} onClick={() => onClick()}
                   className={"flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"}>
               <IoTicketOutline className={"text-black"} size={30}/>
               <span className={"ml-3 text-xl text-black"}>Orders</span>
