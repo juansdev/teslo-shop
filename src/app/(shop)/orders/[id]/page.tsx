@@ -1,15 +1,10 @@
 import Image from "next/image";
 import {Title} from "@/components";
-import {initialData} from "@/seed/seed";
 import clsx from "clsx";
 import {IoCardOutline} from "react-icons/io5";
-
-
-const productsInCar = [
-  initialData.products[0],
-  initialData.products[1],
-  initialData.products[2]
-];
+import {getOrderById} from "@/actions";
+import {notFound} from "next/navigation";
+import {currencyFormat} from "@/utils";
 
 interface IOrderPageProps {
   params: {
@@ -17,9 +12,14 @@ interface IOrderPageProps {
   }
 }
 
-export default function OrderPage({params}: IOrderPageProps) {
+export default async function OrderPage({params}: IOrderPageProps) {
   const {id} = params;
-
+  const {order, ok, countryInOrder} = await getOrderById(id);
+  if (!ok || !order || !countryInOrder)
+    notFound();
+  const orderItems = order.OrderItem;
+  const orderAddress = order.OrderAddress!;
+  const totalProducts = orderItems.reduce((acc, item) => acc + item.quantity, 0);
   return (
     <div className={"flex justify-center items-center mb-72 px-10 sm:px-0"}>
       <div className={"flex flex-col w-[1000px]"}>
@@ -29,31 +29,33 @@ export default function OrderPage({params}: IOrderPageProps) {
             <div className={clsx(
               "flex items-center rounded-lg py-2 px-3.5 text-xs font-bold text-white mb-5",
               {
-                "bg-red-500": false,
-                "bg-green-500": true
+                "bg-red-500": !order.isPaid,
+                "bg-green-500": order.isPaid
               }
             )}>
               <IoCardOutline size={30}/>
-              {/*<span className={"mx-2"}>Purchase Pending</span>*/}
-              <span className={"mx-2"}>Purchase Confirmed</span>
+              <span className={"mx-2"}>
+                {order.isPaid ? "Purchase Confirmed" : "Purchase Pending"}
+              </span>
             </div>
             {
-              productsInCar.map(product => (
-                <div key={product.slug} className={"flex mb-5"}>
+              order.OrderItem.map(item => (
+                <div key={item.product.slug} className={"flex mb-5"}>
                   <Image
-                    src={`/products/${product.images[0]}`}
+                    src={`/products/${item.product.ProductImage[0].url}`}
                     width={100}
                     height={100}
-                    alt={product.title}
+                    alt={item.product.title}
                     style={{
                       width: "100px",
                       height: "100px"
                     }}
                     className={"mr-5"}/>
                   <div>
-                    <p>{product.title}</p>
-                    <p>${product.price} x 3</p>
-                    <p className={"font-bold"}>Subtotal: ${product.price * 3}</p>
+                    <p>{item.product.title}</p>
+                    <p>${item.price} x ${item.quantity}</p>
+                    <p className={"font-bold"}>Subtotal:
+                      {currencyFormat(item.price * item.quantity)}</p>
                   </div>
                 </div>
               ))
@@ -63,13 +65,12 @@ export default function OrderPage({params}: IOrderPageProps) {
           <div className={"bg-white rounded-xl shadow-xl p-7"}>
             <h2 className={"text-2xl mb-2 text-black"}>Delivery Address</h2>
             <div className={"mb-10 text-black"}>
-              <p className={"text-xl"}>Juan Serrano</p>
-              <p className={"font-bold"}>Av. Siempre Viva 123</p>
-              <p>Col. Centro</p>
-              <p>Alcaldía Cuauhtémoc</p>
-              <p>Colombia</p>
-              <p>ZC 123456789</p>
-              <p>123.456.789</p>
+              <p className={"text-xl"}>{orderAddress.firstName} {orderAddress.lastName}</p>
+              <p className={"font-bold"}>{orderAddress.address}</p>
+              {orderAddress.optionalAddress && <p>{orderAddress.optionalAddress}</p>}
+              <p>{orderAddress.city}, {countryInOrder.name}</p>
+              <p>ZC {orderAddress.postalCode}</p>
+              <p>{orderAddress.phone}</p>
             </div>
             <div className={"w-full h-0.5 rounded bg-gray-200 mb-10"}/>
             <h2 className={"text-2xl mb-2 text-black"}>Resume of order</h2>
@@ -78,28 +79,28 @@ export default function OrderPage({params}: IOrderPageProps) {
                 No. Products
               </span>
               <span className={"text-black text-right"}>
-                3 Articles
+                {`${totalProducts} Article${totalProducts > 1 ? "s" : ""}`}
               </span>
 
               <span className={"text-black"}>
                 Subtotal
               </span>
               <span className={"text-black text-right"}>
-                $ 100
+                {currencyFormat(order.subTotal)}
               </span>
 
               <span className={"text-black"}>
                 Taxes (15%)
               </span>
               <span className={"text-black text-right"}>
-                $ 100
+                {currencyFormat(order.tax)}
               </span>
 
               <span className={"mt-5 text-2xl text-black"}>
                 Total
               </span>
               <span className={"mt-5 text-2xl text-black text-right"}>
-                $ 100
+                {currencyFormat(order.total)}
               </span>
             </div>
 
@@ -107,13 +108,14 @@ export default function OrderPage({params}: IOrderPageProps) {
               <div className={clsx(
                 "flex items-center rounded-lg py-2 px-3.5 text-xs font-bold text-white mb-5",
                 {
-                  "bg-red-500": false,
-                  "bg-green-500": true
+                  "bg-red-500": !order.isPaid,
+                  "bg-green-500": order.isPaid
                 }
               )}>
                 <IoCardOutline size={30}/>
-                {/*<span className={"mx-2"}>Purchase Pending</span>*/}
-                <span className={"mx-2"}>Purchase Confirmed</span>
+                <span className={"mx-2"}>
+                  {order.isPaid ? "Purchase Confirmed" : "Purchase Pending"}
+                </span>
               </div>
             </div>
 

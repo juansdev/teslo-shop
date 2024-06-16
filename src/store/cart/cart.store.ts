@@ -16,6 +16,7 @@ interface IState {
   addProductToCart: (product: ICartProduct) => void;
   updateProductQuantity: (product: ICartProduct, quantity: number) => void;
   removeProduct: (product: ICartProduct) => void;
+  clearCart: () => void;
 }
 
 export const useCartStore = create<IState>()(
@@ -76,6 +77,9 @@ export const useCartStore = create<IState>()(
           item => !(item.id === product.id && item.size === product.size)
         );
         set({cart: updatedCartProducts});
+      },
+      clearCart: () => {
+        set({cart: []});
       }
     })
     , {

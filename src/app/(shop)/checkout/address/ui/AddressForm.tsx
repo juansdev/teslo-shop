@@ -38,8 +38,8 @@ export default function AddressForm({countries, userStoredAddress = {}}: IAddres
   const setAddress = useAddressStore(state => state.setAddress);
   const address = useAddressStore(state => state.address);
   const onSubmit = async (data: IFormInputs) => {
-    setAddress(data);
     const {rememberAddress, ...restAddress} = data;
+    setAddress(restAddress);
     if (data.rememberAddress)
       await setUserAddress(restAddress, session!.user.id);
     else await deleteUserAddress(session!.user.id);
