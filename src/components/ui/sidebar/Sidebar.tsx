@@ -1,22 +1,18 @@
 "use client";
 
-import {
-  IoCloseOutline,
-  IoLogInOutline,
-  IoLogOutOutline,
-  IoPeopleOutline,
-  IoPersonOutline,
-  IoSearchOutline,
-  IoShirtOutline,
-  IoTicketOutline
-} from "react-icons/io5";
-import Link from "next/link";
+import {IoCloseOutline, IoSearchOutline} from "react-icons/io5";
 import clsx from "clsx";
 import {useUIStore} from "@/store";
+import {ItemMenuByFilter} from "@/components/ui/sidebar/MenuByRol";
+import {logout} from "@/actions";
+import {useSession} from "next-auth/react";
+import {isPathProtected} from "@/auth.config";
 
 export const Sidebar = () => {
   const isSideMenuOpen = useUIStore(state => state.isSideMenuOpen);
   const closeMenu = useUIStore(state => state.closeSideMenu);
+  const {data: session} = useSession();
+  const isUserAuthenticated = !!session?.user;
 
   return (
     <div>
@@ -40,37 +36,62 @@ export const Sidebar = () => {
           <input type="text" placeholder={"Search"}
                  className={"w-full bg-gray-50 rounded pl-10 py-1 pr-10 border-b-2 text-xl border-gray-200 focus:outline-blue focus:border-blue-500"}/>
         </div>
-        <Link href={"/"} className={"flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"}>
-          <IoPersonOutline className={"text-black"} size={30}/>
-          <span className={"ml-3 text-xl text-black"}>Profile</span>
-        </Link>
-        <Link href={"/"} className={"flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"}>
-          <IoTicketOutline className={"text-black"} size={30}/>
-          <span className={"ml-3 text-xl text-black"}>Orders</span>
-        </Link>
-        <Link href={"/"} className={"flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"}>
-          <IoLogInOutline className={"text-black"} size={30}/>
-          <span className={"ml-3 text-xl text-black"}>Login</span>
-        </Link>
-        <Link href={"/"} className={"flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"}>
-          <IoLogOutOutline className={"text-black"} size={30}/>
-          <span className={"ml-3 text-xl text-black"}>Logout</span>
-        </Link>
+
+        <ItemMenuByFilter
+          menu={"Profile"}
+          validIfUserIsAuthenticated={true}
+          validIfUserHasRole={true}
+          listRolesPermitted={["user", "admin"]}
+          onClick={closeMenu}
+        />
+
+        <ItemMenuByFilter
+          menu={"Orders"}
+          validIfUserIsAuthenticated={true}
+          validIfUserHasRole={true}
+          listRolesPermitted={["user", "admin"]}
+          onClick={closeMenu}
+        />
+
+        {!isUserAuthenticated && <ItemMenuByFilter
+            menu={"Login"}
+            onClick={closeMenu}
+        />}
+
+        <ItemMenuByFilter
+          menu={"Logout"}
+          validIfUserIsAuthenticated={true}
+          onClick={async () => {
+            await logout();
+            if (!isPathProtected(window.location.pathname)) window.location.replace("/");
+          }}
+        />
 
         <div className={"w-full h-px bg-gray-200 my-10"}/>
 
-        <Link href={"/"} className={"flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"}>
-          <IoShirtOutline className={"text-black"} size={30}/>
-          <span className={"ml-3 text-xl text-black"}>Products</span>
-        </Link>
-        <Link href={"/"} className={"flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"}>
-          <IoTicketOutline className={"text-black"} size={30}/>
-          <span className={"ml-3 text-xl text-black"}>Orders</span>
-        </Link>
-        <Link href={"/"} className={"flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"}>
-          <IoPeopleOutline className={"text-black"} size={30}/>
-          <span className={"ml-3 text-xl text-black"}>Users</span>
-        </Link>
+        <ItemMenuByFilter
+          menu={"Products"}
+          validIfUserIsAuthenticated={true}
+          validIfUserHasRole={true}
+          listRolesPermitted={["admin"]}
+          onClick={closeMenu}
+        />
+
+        <ItemMenuByFilter
+          menu={"AdminOrders"}
+          validIfUserIsAuthenticated={true}
+          validIfUserHasRole={true}
+          listRolesPermitted={["admin"]}
+          onClick={closeMenu}
+        />
+
+        <ItemMenuByFilter
+          menu={"Users"}
+          validIfUserIsAuthenticated={true}
+          validIfUserHasRole={true}
+          listRolesPermitted={["admin"]}
+          onClick={closeMenu}
+        />
       </nav>
     </div>
   );
