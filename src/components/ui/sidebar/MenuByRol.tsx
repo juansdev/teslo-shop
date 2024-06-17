@@ -34,7 +34,6 @@ export const ItemMenuByFilter = ({
   const [isValid, setIsValid] = useState(false);
   const [itemMenu, setItemMenu] = useState(<></>);
   useEffect(() => {
-    console.log(session);
     const isUserAuthenticated = !!session?.user;
     const currentRol = session?.user?.role;
 

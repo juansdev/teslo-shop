@@ -11,3 +11,5 @@ export {getUserAddress} from "./address/get-user-address";
 export {placeOrder} from "./order/place-order";
 export {getOrdersByUser} from "./order/get-order-by-user";
 export {getOrderById} from "./order/get-order-by-id";
+export {setTransactionById} from "./payments/set-transaction-by-id";
+export {paypalCheckPayment} from "./payments/paypal-check-payment";
