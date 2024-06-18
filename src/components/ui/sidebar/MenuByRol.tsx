@@ -40,7 +40,7 @@ export const ItemMenuByFilter = ({
     const isUserValid = validIfUserIsAuthenticated && isUserAuthenticated || !validIfUserIsAuthenticated;
     const isCurrentRolValid = validIfUserHasRole && currentRol && listRolesPermitted.includes(currentRol) || !validIfUserHasRole;
     setIsValid(isCurrentRolValid && isUserValid && validByCustomConditional);
-  }, [session]);
+  }, [listRolesPermitted, session, validByCustomConditional, validIfUserHasRole, validIfUserIsAuthenticated]);
   useEffect(() => {
     if (isValid)
       switch (menu) {
@@ -108,6 +108,6 @@ export const ItemMenuByFilter = ({
           );
           break;
       }
-  }, [isValid]);
+  }, [isValid, menu, onClick]);
   return itemMenu;
 }

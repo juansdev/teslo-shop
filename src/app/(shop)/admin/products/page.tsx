@@ -12,7 +12,7 @@ interface IProductsPageProps {
 
 export default async function ProductsPage({searchParams}: IProductsPageProps) {
   const page = searchParams.page ? Number(searchParams.page) : 1;
-  const {products, currentPage, totalPages} = await getPaginatedProductsWithImages({
+  const {products, totalPages} = await getPaginatedProductsWithImages({
     paginationOptions: {
       page
     }

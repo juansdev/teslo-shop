@@ -11,7 +11,7 @@ interface IHomeProps {
 
 export default async function Home({searchParams}: IHomeProps) {
   const page = searchParams.page ? Number(searchParams.page) : 1;
-  const {products, currentPage, totalPages} = await getPaginatedProductsWithImages({
+  const {products, totalPages} = await getPaginatedProductsWithImages({
     paginationOptions: {
       page
     }

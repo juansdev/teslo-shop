@@ -9,7 +9,7 @@ interface IState {
 
 export const useAddressStore = create<IState>()(
   persist(
-    (set, get) => ({
+    (set, _) => ({
       address: {
         firstName: "",
         lastName: "",

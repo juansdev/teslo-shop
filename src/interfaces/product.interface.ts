@@ -29,4 +29,4 @@ export interface IProductImage {
 
 export type ICategory = 'men' | 'women' | 'kid' | 'unisex';
 export type ISize = 'XS' | 'S' | 'M' | 'L' | 'XL' | 'XXL' | 'XXXL';
-export type IType = 'shirts' | 'pants' | 'hoodies' | 'hats';
+// export type IType = 'shirts' | 'pants' | 'hoodies' | 'hats';

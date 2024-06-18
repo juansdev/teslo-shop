@@ -24,7 +24,7 @@ export default async function GenderPage({params, searchParams}: ICategoryPagePr
     "unisex": "for Everybody"
   }
   if (!Object.keys(labels).includes(gender)) notFound();
-  const {products, currentPage, totalPages} = await getPaginatedProductsWithImages({
+  const {products, totalPages} = await getPaginatedProductsWithImages({
     where: {
       gender
     },

@@ -18,7 +18,7 @@ export default async function OrdersPage({searchParams}: IOrdersPageProps) {
     }
   });
   if (!ok) redirect("/auth/login");
-  const {currentPage, totalPages, orders} = restResponse;
+  const {totalPages, orders} = restResponse;
   return (
     <>
       <Title title="All Orders"/>

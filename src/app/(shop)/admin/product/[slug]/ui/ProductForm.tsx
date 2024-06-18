@@ -29,7 +29,7 @@ const sizes = ["XS", "S", "M", "L", "XL", "XXL"];
 
 export const ProductForm = ({product, categories}: Props) => {
   const router = useRouter();
-  const {handleSubmit, register, formState: {isValid}, getValues, setValue, watch} = useForm<IFormInputs>(
+  const {handleSubmit, register, getValues, setValue, watch} = useForm<IFormInputs>(
     {
       defaultValues: {
         ...product,
