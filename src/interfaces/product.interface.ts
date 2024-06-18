@@ -22,6 +22,11 @@ export interface ICartProduct {
   image: string;
 }
 
+export interface IProductImage {
+  id: number;
+  url: string;
+}
+
 export type ICategory = 'men' | 'women' | 'kid' | 'unisex';
 export type ISize = 'XS' | 'S' | 'M' | 'L' | 'XL' | 'XXL' | 'XXXL';
 export type IType = 'shirts' | 'pants' | 'hoodies' | 'hats';

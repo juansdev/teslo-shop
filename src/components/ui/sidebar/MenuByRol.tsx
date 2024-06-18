@@ -64,7 +64,7 @@ export const ItemMenuByFilter = ({
           break;
         case "AdminOrders":
           setItemMenu(
-            <Link href={"/"} onClick={() => onClick()}
+            <Link href={"/admin/orders"} onClick={() => onClick()}
                   className={"flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"}>
               <IoTicketOutline className={"text-black"} size={30}/>
               <span className={"ml-3 text-xl text-black"}>Orders</span>
@@ -73,7 +73,7 @@ export const ItemMenuByFilter = ({
           break;
         case "Products":
           setItemMenu(
-            <Link href={"/"} onClick={() => onClick()}
+            <Link href={"/admin/products"} onClick={() => onClick()}
                   className={"flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"}>
               <IoShirtOutline className={"text-black"} size={30}/>
               <span className={"ml-3 text-xl text-black"}>Products</span>
@@ -82,7 +82,7 @@ export const ItemMenuByFilter = ({
           break;
         case "Users":
           setItemMenu(
-            <Link href={"/"} onClick={() => onClick()}
+            <Link href={"/admin/users"} onClick={() => onClick()}
                   className={"flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"}>
               <IoPeopleOutline className={"text-black"} size={30}/>
               <span className={"ml-3 text-xl text-black"}>Users</span>

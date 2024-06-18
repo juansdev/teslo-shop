@@ -6,8 +6,10 @@ import prisma from "@/lib/prisma";
 import {Role} from "@prisma/client";
 
 export const listPathProtected = ["/checkout", "/profile", "/orders"];
+export const listPathProtectedForAdmin = ["/admin"];
 
 export const isPathProtected = (currentUrl: string) => listPathProtected.some(pathProtected => currentUrl.startsWith(pathProtected));
+export const isPathProtectedForAdmin = (currentUrl: string) => listPathProtectedForAdmin.some(pathProtected => currentUrl.startsWith(pathProtected));
 
 export interface ISessionUser {
   id: string;
@@ -48,6 +50,8 @@ export const authConfig: NextAuthConfig = {
       // Redirect unauthenticated users to login page
       if (isPathProtected(nextUrl.pathname))
         return isLoggedIn;
+      else if (isPathProtectedForAdmin(nextUrl.pathname) && auth?.user?.role === "admin")
+        return true;
       return true;
     },
     jwt({token, user}) {

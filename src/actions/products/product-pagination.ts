@@ -1,18 +1,7 @@
 "use server";
 
 import prisma from "@/lib/prisma";
-
-interface IPaginationOptions {
-  page?: number;
-  take?: number;
-}
-
-interface IOptions {
-  where?: {
-    [key: string]: string;
-  },
-  paginationOptions: IPaginationOptions
-}
+import {IOptions} from "@/interfaces";
 
 export const getPaginatedProductsWithImages = async ({
                                                        where,
