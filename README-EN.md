@@ -8,7 +8,7 @@
   <em>Seamless, Secure, and Infinitely Customizable!With Teslo-Shop's modular architecture powered by NextAuth.js, every interaction is a step closer to seamless user engagement. The heart of our authentication beats within the [nextauth].ts, fortifying your journey with secure registration, login, and much more, all for an enriched experience!Built upon versatile integration capabilities, Teslo-Shop's nextauth.d.ts fine-tunes the NextAuth session structure, allowing a perfect blend of custom User data with default user data. This way, you hold the keys to a truly dynamic and flexible authentication system!Get ready for the launch sequence. Teslo-Shop is not just an eCommerce solution, its a gateway to tomorrow. Join us now, as we navigate together through endless possibilities!</em>
 </p>
 <p align="center">
-	<img src="https://img.shields.io/github/license/juansdev/DDD?style=default&logoColor=white&color=0080ff" alt="license">
+	<img src="https://img.shields.io/github/license/juansdev/teslo-shop?style=default&logo=opensourceinitiative&logoColor=white&color=0080ff" alt="license">
 	<img src="https://img.shields.io/github/last-commit/juansdev/teslo-shop?style=default&logo=git&logoColor=white&color=0080ff" alt="last-commit">
 	<img src="https://img.shields.io/github/languages/top/juansdev/teslo-shop?style=default&color=0080ff" alt="repo-top-language">
 	<img src="https://img.shields.io/github/languages/count/juansdev/teslo-shop?style=default&color=0080ff" alt="repo-language-count">
