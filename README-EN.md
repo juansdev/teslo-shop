@@ -27,7 +27,6 @@
 - [ Getting Started](#-getting-started)
   - [ Installation](#-installation)
   - [ Usage](#-usage)
-  - [ Tests](#-tests)
 </details>
 <hr>
 
@@ -777,6 +776,18 @@ The teslo-shop is a cutting-edge eCommerce application developed in a modern and
 > ```console
 > $ npm install
 > ```
+> 
+> 4. Duplicate the .env.template file, rename it to .env, and edit it by filling in the required fields.
+>
+> 5. Run the migrations using the command:
+> ```console
+> $ npx prisma migrate deploy
+> ```
+>
+> 6. Run the Seeds using the command:
+> ```console
+> $ npm run seed
+> ```
 
 ###  Usage
 
@@ -784,12 +795,5 @@ The teslo-shop is a cutting-edge eCommerce application developed in a modern and
 
 > Run teslo-shop using the command below:
 > ```console
-> $ npm run build && node dist/main.js
-> ```
-
-###  Tests
-
-> Run the test suite using the command below:
-> ```console
-> $ npm test
+> $ npm run build && npm start
 > ```

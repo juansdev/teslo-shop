@@ -27,7 +27,6 @@
 - [Comenzando](#-comenzando)
   - [Instalación](#-instalación)
   - [Uso](#-uso)
-  - [Pruebas](#-pruebas)
 </details>
 <hr>
 
@@ -781,6 +780,18 @@ El centro de control de este repositorio es el archivo package.json, que organiz
 > ```console
 > $ npm install
 > ```
+> 
+> 4. Duplica el archivo .env.template, y renombralo por .env, editalo rellenando los campos requeridos.
+> 
+> 5. Ejecuta las migraciones mediante el comando:
+> ```console
+> $ npx prisma migrate deploy
+> ```
+> 
+> 5. Ejecuta los Seeds mediante el comando:
+> ```console
+> $ npm run seed
+> ```
 
 ###  Uso
 
@@ -788,12 +799,5 @@ El centro de control de este repositorio es el archivo package.json, que organiz
 
 > Levanta teslo-shop usando el comando debajo:
 > ```console
-> $ npm run build && node dist/main.js
-> ```
-
-###  Pruebas
-
-> Corre la suite de pruebas usando el comando debajo:
-> ```console
-> $ npm test
+> $ npm run build && npm start
 > ```
